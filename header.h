@@ -59,42 +59,31 @@ struct ListFilm {
 };
 
 // FUNGSI DAN PROSEDUR
-
-// List Parent
 void createListAplikasi(ListAplikasi &L);
 address_aplikasi allocateAplikasi(infotype_aplikasi data);
-void insertAplikasi(ListAplikasi &L, address_aplikasi P);
-void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi);
-
-// List Child
 void createListFilm(ListFilm &L);
 address_film allocateFilm(infotype_film data);
-void insertFilm(ListFilm &L, address_film P);
-void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film);
-
-// Relasi
 address_relasi allocateRelasi(address_film child);
+void insertAplikasi(ListAplikasi &L, address_aplikasi P);
+void insertFilm(ListFilm &L, address_film P);
 void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film);
+void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi);
+void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film);
 void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_film);
-
-// Searching
 address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi);
+
 address_film findFilm(ListFilm L, string nama_film);
 bool findRelation(ListAplikasi L_aplikasi, string nama_aplikasi, string nama_film);
-
-// Show
 void showAllAplikasi(ListAplikasi L);
 void showAllFilm(ListFilm L);
 void showChildFromParent(ListAplikasi L_aplikasi, string nama_aplikasi);
 void showParentWithChild(ListAplikasi L_aplikasi);
-void showParentFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
 
-// Statistik
+void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi);
+void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
 void countRelationFromParent(ListAplikasi L_aplikasi);
-void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi);
-void countChildWithoutRelation(ListFilm L_film);
-
-// Edit Relasi
+void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
+void countChildWithoutRelation(ListFilm L_film, ListAplikasi L_aplikasi);
 void editRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film_lama, string nama_film_baru);
 
 #endif // HEADER_H_INCLUDED
