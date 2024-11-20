@@ -7,55 +7,50 @@
 #define prev(P) P->prev
 using namespace std;
 
-// ADT LAYANAN STREAMING (PARENT)
 struct aplikasi_streaming {
     string nama_aplikasi, kualitas;
     float rating;
     int harga;
 };
 
-typedef aplikasi_streaming infotype_aplikasi;
-typedef struct ElmAplikasi *address_aplikasi;
-
-struct ElmAplikasi {
-    infotype_aplikasi info;    // Data aplikasi
-    address_aplikasi next;     // Pointer ke aplikasi berikutnya
-    ListRelasi relation;       // List relasi untuk child
-};
-
-struct ListAplikasi {
-    address_aplikasi first;    // Pointer ke aplikasi pertama
-};
-
-// RELASI M:N
-typedef struct ElmRelasi *address_relasi;
-
-struct ElmRelasi {
-    address_film film;         // Pointer ke film (child)
-    address_relasi next;       // Pointer ke relasi berikutnya
-};
-
-struct ListRelasi {
-    address_relasi first;      // List untuk menyimpan relasi (M:N)
-};
-
-// ADT FILM (CHILD)
 struct film {
     string nama, genre;
     int tahun;
     float rating;
 };
 
+typedef aplikasi_streaming infotype_aplikasi;
+typedef struct ElmAplikasi *address_aplikasi;
+typedef struct ElmRelasi *address_relasi;
 typedef film infotype_film;
 typedef struct ElmFilm *address_film;
 
+struct ElmRelasi {
+    address_film film;
+    address_relasi next;
+};
+
+struct ListRelasi {
+    address_relasi first;
+};
+
+struct ElmAplikasi {
+    infotype_aplikasi info;
+    address_aplikasi next;
+    ListRelasi relation;
+};
+
+struct ListAplikasi {
+    address_aplikasi first;
+};
+
 struct ElmFilm {
-    infotype_film info_film;   // Data film
-    address_film next, prev;   // Pointer untuk doubly linked list
+    infotype_film info_film;
+    address_film next, prev;
 };
 
 struct ListFilm {
-    address_film first, last;  // Pointer ke film pertama dan terakhir
+    address_film first, last;
 };
 
 // FUNGSI DAN PROSEDUR
