@@ -189,7 +189,15 @@ void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_
 };
 
 address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi){
-
+    address_aplikasi P;
+    P = L.first;
+    while (P != NULL){
+        if (P->info.nama_aplikasi == nama_aplikasi){
+            return P;
+        }
+        P = P->next;
+    }
+    return NULL;
 };
 //-------------------------------BATAS SASSA------------------------------------------
 
