@@ -186,8 +186,47 @@ void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film) {
 
 
 
-void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_film){
+void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_film) {
+    if (L_aplikasi.first == NULL) {
+        cout << "List Aplikasi kosong" << endl;
+    } else {
+        address_aplikasi P;
+        P = findAplikasi(L_aplikasi, nama_aplikasi);
+        if (P == NULL) {
+            cout << "Aplikasi dengan nama " << nama_aplikasi << " tidak ditemukan" << endl;
+        } else {
+            // Cek relasi
+            if (P->relasi == NULL) {
+                cout << "Tidak ada relasi pada aplikasi " << nama_aplikasi << endl;
+            } else {
+                address_relasi R;
+                address_relasi S;
+                R = P->relasi;
+                S = NULL;
+                bool isDeleted = false; //flag
+                while (R != NULL && isDeleted == false) {
+                    if (R->film != NULL && R->film->info_film.nama == nama_film) {
+                        if (R == P->relasi) {
+                            P->relasi = R->next;
+                        } else {
+                            S->next = R->next;
+                        }
+                        delete R;
+                        isDeleted = true;
+                    }
+                    S = R;
+                    R = R->next;
+                }
 
+                //hasil berdasarkan flag
+                if (isDeleted) {
+                    cout << "Relasi dengan film " << nama_film << " pada aplikasi " << nama_aplikasi << " berhasil dihapus" << endl;
+                } else {
+                    cout << "Film dengan nama " << nama_film << " tidak ditemukan dalam relasi aplikasi " << nama_aplikasi << endl;
+                }
+            }
+        }
+    }
 };
 
 address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi){
