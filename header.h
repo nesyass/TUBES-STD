@@ -59,6 +59,8 @@ void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi);
 void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film);
 void deleteRelation(address_aplikasi aplikasi, string nama_film);
 address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi);
+int menu();
+void clearScreen();
 //--------------------------------------BATAS SASSA------------------------------------------------------------------------------\
 
 address_film findFilm(ListFilm L, string nama_film);
