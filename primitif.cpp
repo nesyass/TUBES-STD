@@ -84,104 +84,106 @@ void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_apli
 };
 
 void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi) {
-    address_aplikasi P, Q, R, S;
-    P = findAplikasi(L, nama_aplikasi); // Cari aplikasi berdasarkan nama
+    address_aplikasi P, Q, S;
 
+    P = findAplikasi(L, nama_aplikasi);
     if (P == NULL) {
         cout << "Aplikasi tidak ditemukan" << endl;
     } else {
-        // Periksa apakah ada relasi
+        // Hapus semua relasi yang terhubung dengan aplikasi
         if (P->relasi != NULL) {
             address_relasi T, U;
             T = P->relasi;
             while (T != NULL) {
                 U = T;
                 T = T->next;
-                delete U; // Hapus elemen relasi
+                delete U;
             }
-            P->relasi = NULL; // aplikasi di-set ke NULL setelah semua relasi dihapus
+            P->relasi = NULL;
         }
-        //hapus aplikasi
+
+        // Menghapus aplikasi dari list
         if (L.first == NULL) {
             cout << "List aplikasi kosong" << endl;
+        } else if (L.first == P && L.first->next == NULL) { // List hanya berisi satu elemen
+            P = L.first;
+            L.first = NULL;
+            delete P;
+            cout << "Aplikasi berhasil dihapus" << endl;
         } else if (L.first == P) { //delete first
             S = L.first;
             L.first = S->next;
             S->next = NULL;
             delete S;
+            cout << "Aplikasi berhasil dihapus" << endl;
         } else {
             Q = L.first;
-            while (Q->next != NULL && Q->next != P) { //mencari posisi aplikasi
+            while (Q->next != NULL && Q->next != P) { // Mencari aplikasi dalam list
                 Q = Q->next;
             }
             if (Q->next == NULL) {
-                cout << "Aplikasi tidak ditemukan dalam list" << endl; // Aplikasi tidak ditemukan
-            } else if (Q->next == P) { // delete last
+                cout << "Aplikasi tidak ditemukan dalam list" << endl;
+            } else if (Q->next == P && P->next == NULL) { //delete last
                 S = Q->next;
                 Q->next = NULL;
                 delete S;
-            } else { // delete after
+                cout << "Aplikasi berhasil dihapus" << endl;
+            } else { //delete after
                 S = Q->next;
                 Q->next = S->next;
                 S->next = NULL;
                 delete S;
+                cout << "Aplikasi berhasil dihapus" << endl;
             }
         }
     }
-}
-
-
+};
 
 void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film) {
-    address_film P, S;
-    P = findFilm(L, nama_film); // Mencari film berdasarkan nama
+    address_film P = findFilm(L, nama_film);
 
-    if (P == NULL) {
+    if (L.first == NULL) { // List kosong
+        cout << "List film kosong" << endl;
+    } else if (P == NULL) { // Film tidak ditemukan
         cout << "Film tidak ditemukan" << endl;
     } else {
-        // Menghapus relasi
-        address_relasi U;
-        address_aplikasi T;
-        T = L_aplikasi.first;
+        // Hapus semua relasi terkait film
+        address_aplikasi T = L_aplikasi.first;
         while (T != NULL) {
-            U = T->relasi;
+            address_relasi U = T->relasi;
             while (U != NULL) {
-                if (U->film == P) {  // Jika relasi film ditemukan
-                    U->film = NULL;   // Hapus relasi film
+                if (U->film == P) {
+                    U->film = NULL; // Putuskan relasi film
                 }
                 U = U->next;
             }
             T = T->next;
         }
 
-        // Menghapus film dari list
-        if (L.first == P && L.last == P) { // List hanya berisi satu elemen
-            S = L.first;
+        // Hapus film dari list
+        if (L.first == P && L.last == P) { // Hanya ada satu elemen
             L.first = NULL;
             L.last = NULL;
-            delete S;
-        } else if (L.first == P) { // Menghapus elemen pertama
-            S = L.first;
-            L.first = S->next;
+        } else if (L.first == P) { // Elemen berada di awal
+            L.first = P->next;
             L.first->prev = NULL;
-            S->next = NULL;
-            delete S;
-        } else if (L.last == P) { // Menghapus elemen terakhir
-            S = L.last;
-            L.last = S->prev;
+        } else if (L.last == P) { // Elemen berada di akhir
+            L.last = P->prev;
             L.last->next = NULL;
-            S->prev = NULL;
-            delete S;
-        } else { // Menghapus elemen di tengah
-            S = P;
-            S->prev->next = S->next;
-            S->next->prev = S->prev;
-            S->next = NULL;
-            S->prev = NULL;
-            delete S;
+        } else { // Elemen berada di tengah
+            P->prev->next = P->next;
+            P->next->prev = P->prev;
         }
+
+        // Hapus elemen
+        P->next = NULL;
+        P->prev = NULL;
+        delete P;
+
+        cout << "Film berhasil dihapus" << endl;
     }
-};
+}
+
 
 
 void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_film){
