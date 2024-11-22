@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "header.h"
 using namespace std;
 
@@ -239,6 +240,31 @@ address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi){
         P = P->next;
     }
     return NULL;
+};
+
+int menu(){
+    cout << "=== MENU APLIKASI STREAMING ===" << endl;
+    cout << "1. Tambah Aplikasi" << endl;
+    cout << "2. Tambah Film" << endl;
+    cout << "3. Tampilkan Semua Aplikasi" << endl;
+    cout << "4. Tampilkan Semua Film" << endl;
+    cout << "5. Buat Relasi Aplikasi dengan Film" << endl;
+    cout << "6. Hapus Aplikasi" << endl;
+    cout << "7. Hapus Film" << endl;
+    cout << "8. Hapus Relasi" << endl;
+    cout << "9. Keluar" << endl;
+    cout << "Masukkan pilihan: ";
+    int pilih;
+    cin >> pilih;
+    return pilih;
+};
+
+void clearScreen() {
+#ifdef _WIN32
+    system("cls"); // untuk Windows
+#else
+    system("clear"); // untuk Linux/Mac
+#endif
 };
 //-------------------------------BATAS SASSA------------------------------------------
 
