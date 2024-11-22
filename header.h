@@ -52,7 +52,6 @@ void createListAplikasi(ListAplikasi &L);
 address_aplikasi allocateAplikasi(infotype_aplikasi data);
 void createListFilm(ListFilm &L);
 address_film allocateFilm(infotype_film data);
-address_relasi allocateRelasi(address_film child);
 void insertAplikasi(ListAplikasi &L, address_aplikasi P);
 void insertFilm(ListFilm &L, address_film P);
 void insertRelation(address_aplikasi aplikasi, address_film film);
