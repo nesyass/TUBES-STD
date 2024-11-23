@@ -306,3 +306,63 @@ void editRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplika
 
 //-------------------------------BATAS ACA---------------------------------------------
 
+void showDataChildHaveParents(ListFilm L_film, ListAplikasi L_Aplikasi) {
+    address_film P = L_film.first;
+    if (P== NULL) {
+        cout << "Tidak ada film dalam daftar" << endl;
+        return;
+    }
+
+    while (P != NULL) {
+        cout << "Film: " << P->info_film.nama, P->info_film.genre, P->info_film.rating, P->info_film.tahun << " dimiliki oleh aplikasi: ";
+        bool found = false;
+        address_aplikasi Q = L_Aplikasi.first;
+        while (Q != NULL) {
+            address_relasi R = Q->relasi;
+            while (R!= NULL) {
+                if (R->film == P) {
+                    cout << Q->info.nama_aplikasi << ", ";
+                    found = true;
+                }
+                R = R->next;
+            }
+            Q= Q->next;
+        }
+        if (!found) {
+            cout << "Belum dimiliki aplikasi manapun";
+        }
+        cout << endl;
+        P = P->next;
+    }
+
+}
+
+void ShowParentRelationChild(ListAplikasi L_Aplikasi, ListFilm L_Film, string nama_film) {
+    address_film F = findFilm(L_Film, nama_film); // Cari film berdasarkan nama
+    if (F == NULL) {
+        cout << "Film dengan nama '" << nama_film << "' tidak ditemukan." << endl;
+        return;
+    }
+
+    cout << "Film '" << nama_film << "' dimiliki oleh aplikasi: ";
+
+    address_aplikasi Q = L_Aplikasi.first; // Mulai dari aplikasi pertama
+    bool found = false; 
+    while (Q != NULL) {
+        address_relasi R = Q->relasi; // Mulai dari daftar relasi aplikasi
+        while (R != NULL) {
+            if (R->film == F) { // Jika film ditemukan di relasi
+                cout << Q->info.nama_aplikasi << ", ";
+                found = true;
+            }
+            R = R->next; // Lanjut ke relasi berikutnya
+        }
+        Q = Q->next; // Lanjut ke aplikasi berikutnya
+    }
+
+    if (!found) {
+        cout << "Belum dimiliki oleh aplikasi mana pun.";
+    }
+    cout << endl; // Tambahkan baris baru setelah output
+}
+
