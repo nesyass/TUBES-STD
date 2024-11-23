@@ -78,6 +78,7 @@ void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nam
 void countChildWithoutRelation(ListFilm L_film, ListAplikasi L_aplikasi);
 void editRelation(address_aplikasi aplikasi, ListFilm &L_film, string nama_film_lama, string nama_film_baru);
 //--------------------------------------BATAS ACA------------------------------------------------------------------------------\
-
+void showDataChildHaveParents(ListFilm L_film, ListAplikasi L_Aplikasi);
+void ShowParentRelationChild(ListAplikasi L_Aplikasi, ListFilm L_Film);
 
 #endif // HEADER_H_INCLUDED
