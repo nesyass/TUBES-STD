@@ -280,15 +280,145 @@ address_film findFilm(ListFilm L, string nama_film){
     return NULL;
 };
 
-bool findRelation(ListAplikasi L_aplikasi, string nama_aplikasi, string nama_film);
+bool findRelation(ListAplikasi L_aplikasi, string nama_aplikasi, string nama_film){
+    address_aplikasi p = findAplikasi(L_aplikasi, nama_aplikasi);
 
-void showAllAplikasi(ListAplikasi L);
+    if(p != NULL) {
+        address_relasi r;
+        r = p->relasi;
+        while(r != NULL){
+            if(r->film->info_film.nama == nama_film && r->film != NULL) {
+                return true;
+            }
+            r = r->next;
+        }
 
-void showAllFilm(ListFilm L);
+    }
+    return false;
+};
 
-void showChildFromParent(ListAplikasi L_aplikasi, string nama_aplikasi);
+void showAllAplikasi(ListAplikasi L){
+    address_aplikasi p;
 
-void showParentWithChild(ListAplikasi L_aplikasi);
+    p = L.first;
+    int i = 1;
+
+    if (p == NULL) {
+        cout << "Tidak ada aplikasi dalam list. Silahkan tambahkan aplikasi terlebih dahulu!" << endl;
+    }
+
+    cout << "================ DAFTAR APLIKASI ================" << endl;
+    while(p != NULL) {
+        cout << "Daftar aplikasi ke-" << i << " :" << endl;
+        cout << "Nama Aplikasi    : " << p->info.nama_aplikasi << endl;
+        cout << "Kualitas         : " << p->info.kualitas << endl;
+        cout << "Rating           : " << p->info.rating << endl;
+        cout << "Harga            : " << p->info.harga << endl;
+        cout << endl;
+        p = p->next;
+        i++;
+    }
+    cout << "=================================================" << endl;
+}
+
+void showAllFilm(ListFilm L){
+    address_film p;
+
+    p = L.first;
+    int i = 1;
+
+    if (p == NULL) {
+        cout << "Tidak ada film dalam list. Silahkan tambahkan film terlebih dahulu!" << endl;
+    }
+
+    cout << "================== DAFTAR FILM ==================" << endl;
+    while(p != NULL) {
+        cout << "Daftar film ke-" << i << " :" << endl;
+        cout << "Nama Film    : " << p->info_film.nama << endl;
+        cout << "Genre        : " << p->info_film.genre << endl;
+        cout << "Tahun        : " << p->info_film.tahun << endl;
+        cout << "Rating       : " << p->info_film.rating << endl;
+        cout << endl;
+        p = p->next;
+        i++;
+    }
+    cout << "=================================================" << endl;
+
+}
+
+void showChildFromParent(ListAplikasi L_aplikasi, string nama_aplikasi){
+    address_aplikasi p = findAplikasi(L_aplikasi, nama_aplikasi);
+
+    if (p == NULL){
+        cout << "Tidak ada aplikasi dengan nama" << nama_aplikasi << "pada list." << endl;
+    }
+
+    address_relasi r;
+    r = p->relasi;
+
+    if(r == NULL) {
+        cout << "Tidak ada film pada aplikasi" << nama_aplikasi << "." << endl;
+    }
+    int i = 1;
+    cout << "=== Daftar film pada aplikasi" << p->info.nama_aplikasi << " ===" << endl;
+    while(r != NULL){
+         cout << "Daftar film ke-" << i << " :" << endl;
+         cout << "Nama Film    : " << r->film->info_film.nama << endl;
+         cout << "Genre        : " << r->film->info_film.genre << endl;
+         cout << "Tahun        : " << r->film->info_film.tahun << endl;
+         cout << "Rating       : " << r->film->info_film.rating << endl;
+         cout << endl;
+         r = r->next;
+        i++;
+    }
+    cout << "=========================================" << endl;
+}
+
+void showParentWithChild(ListAplikasi L_aplikasi){
+    address_aplikasi p;
+
+    p = L_aplikasi.first;
+    int i = 1;
+
+    if (p == NULL) {
+        cout << "Tidak ada aplikasi dalam list. Silahkan tambahkan aplikasi terlebih dahulu!" << endl;
+    }
+
+    cout << "================ DAFTAR APLIKASI ================" << endl;
+    while(p != NULL) {
+        cout << "Daftar aplikasi ke-" << i << " :" << endl;
+        cout << "Nama Aplikasi    : " << p->info.nama_aplikasi << endl;
+        cout << "Kualitas         : " << p->info.kualitas << endl;
+        cout << "Rating           : " << p->info.rating << endl;
+        cout << "Harga            : " << p->info.harga << endl;
+        cout << endl;
+
+        address_relasi r;
+        r = p->relasi;
+
+        if(r == NULL) {
+            cout << "   Tidak ada film pada aplikasi" << p->info.nama_aplikasi << "." << endl;
+        }
+
+        int j = 1;
+        cout << "   === Daftar film pada aplikasi" << p->info.nama_aplikasi << " ===" << endl;
+        while(r != NULL){
+            cout << "   Daftar film ke-" << i << " :" << endl;
+            cout << "   Nama Film    : " << r->film->info_film.nama << endl;
+            cout << "   Genre        : " << r->film->info_film.genre << endl;
+            cout << "   Tahun        : " << r->film->info_film.tahun << endl;
+            cout << "   Rating       : " << r->film->info_film.rating << endl;
+            cout << "   ----------------------------------" << endl;
+            r = r->next;
+            j++;
+        }
+        cout << "   ===================================" << endl;
+        p = p->next;
+        i++;
+    }
+    cout << "=================================================" << endl;
+
+};
 //-------------------------------BATAS LYNA------------------------------------------
 
 void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi);
