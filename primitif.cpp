@@ -54,31 +54,41 @@ void insertFilm(ListFilm &L, address_film P){ //insert last//
     }
 };
 
-void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film){
-    address_aplikasi A;
-    A = findAplikasi(L_aplikasi, nama_aplikasi);
+void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film) {
+    // Cari aplikasi yang sesuai di dalam ListAplikasi
+    address_aplikasi A = findAplikasi(L_aplikasi, nama_aplikasi);
 
-    address_film F;
-    F = findFilm(L_film, nama_film);
+    // Cari film yang sesuai di dalam ListFilm
+    address_film F = findFilm(L_film, nama_film);
 
-    if (A != NULL && F != NULL){
-        address_relasi R;
-        R = A->relasi;
-        while (R != NULL){
-            if (R->film == F){
+    // Jika aplikasi dan film ditemukan
+    if (A != NULL && F != NULL) {
+        // Cek apakah relasi sudah ada
+        address_relasi R = A->relasi;
+        bool relasiSudahAda = false; // Flag untuk mengecek apakah relasi sudah ada
+
+        while (R != NULL) {
+            if (R->film == F) {
+                relasiSudahAda = true; // Tandai bahwa relasi sudah ada
                 cout << "Film sudah tersedia di aplikasi" << endl;
-            } else {
-                R = R->next;
+                break; // Keluar dari loop jika relasi sudah ada
             }
+            R = R->next; // Lanjutkan ke relasi berikutnya
         }
-        address_relasi newR;
-        newR->next = A->relasi;
-        A->relasi = newR;
-        cout << "Film dengan judul " << nama_film << " berhasil di tambahkan ke aplikasi " << nama_aplikasi << endl;
+
+        if (!relasiSudahAda) {
+            address_relasi newR = new ElmRelasi; // Alokasikan memori untuk objek baru
+            newR->film = F;
+            newR->next = A->relasi;
+            A->relasi = newR;
+
+            cout << "Film dengan judul " << F->info_film.nama << " berhasil ditambahkan ke aplikasi " << nama_aplikasi << endl;
+        }
     } else {
-        if (A == NULL){
+        if (A == NULL) {
             cout << "Aplikasi dengan nama " << nama_aplikasi << " tidak ditemukan" << endl;
-        } else {
+        }
+        if (F == NULL) {
             cout << "Film dengan judul " << nama_film << " tidak ditemukan" << endl;
         }
     }
@@ -249,10 +259,12 @@ int menu(){
     cout << "3. Tampilkan Semua Aplikasi" << endl;
     cout << "4. Tampilkan Semua Film" << endl;
     cout << "5. Buat Relasi Aplikasi dengan Film" << endl;
-    cout << "6. Hapus Aplikasi" << endl;
-    cout << "7. Hapus Film" << endl;
-    cout << "8. Hapus Relasi" << endl;
-    cout << "9. Keluar" << endl;
+    cout << "6. Menampilkan Daftar Film dari suatu Aplikasi" << endl;
+    cout << "7. Menampilkan Daftar Aplikasi yang menyediakan suatu Film" << endl;
+    cout << "8. Hapus Aplikasi" << endl;
+    cout << "9. Hapus Film" << endl;
+    cout << "10. Hapus Relasi" << endl;
+    cout << "11. Keluar" << endl;
     cout << "Masukkan pilihan: ";
     int pilih;
     cin >> pilih;
@@ -260,11 +272,11 @@ int menu(){
 };
 
 void clearScreen() {
-#ifdef _WIN32
-    system("cls"); // untuk Windows
-#else
-    system("clear"); // untuk Linux/Mac
-#endif
+    if (_WIN32) {
+        system("cls"); // untuk Windows
+    } else {
+        system("clear"); // untuk Linux/Mac
+    }
 };
 //-------------------------------BATAS SASSA------------------------------------------
 
