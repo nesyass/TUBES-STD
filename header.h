@@ -54,7 +54,7 @@ void createListFilm(ListFilm &L);
 address_film allocateFilm(infotype_film data);
 void insertAplikasi(ListAplikasi &L, address_aplikasi P);
 void insertFilm(ListFilm &L, address_film P);
-void insertRelation(address_aplikasi aplikasi, address_film film);
+void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film);
 void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi);
 void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film);
 void deleteRelation(address_aplikasi aplikasi, string nama_film);
@@ -67,7 +67,7 @@ address_film findFilm(ListFilm L, string nama_film);
 bool findRelation(address_aplikasi aplikasi, string nama_film);
 void showAllAplikasi(ListAplikasi L);
 void showAllFilm(ListFilm L);
-void showChildFromParent(address_aplikasi aplikasi);
+void showChildFromParent(ListAplikasi L_aplikasi, string nama_aplikasi);
 void showParentWithChild(ListAplikasi L_aplikasi);
 //--------------------------------------BATAS LYNA------------------------------------------------------------------------------\
 
