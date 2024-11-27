@@ -433,23 +433,8 @@ void showParentWithChild(ListAplikasi L_aplikasi){
 };
 //-------------------------------BATAS LYNA------------------------------------------
 
-void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi);
-
-void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
-
-void countRelationFromParent(ListAplikasi L_aplikasi);
-
-void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
-
-void countChildWithoutRelation(ListFilm L_film, ListAplikasi L_aplikasi);
-
-void editRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film_lama, string nama_film_baru);
-
-
-//-------------------------------BATAS ACA---------------------------------------------
-
-void showDataChildHaveParents(ListFilm L_film, ListAplikasi L_Aplikasi) {
-    address_film P = L_film.first;
+void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi) {
+ address_film P = L_film.first;
     if (P== NULL) {
         cout << "Tidak ada film dalam daftar" << endl;
         return;
@@ -476,11 +461,10 @@ void showDataChildHaveParents(ListFilm L_film, ListAplikasi L_Aplikasi) {
         cout << endl;
         P = P->next;
     }
-
 }
 
-void ShowParentRelationChild(ListAplikasi L_Aplikasi, ListFilm L_Film, string nama_film) {
-    address_film F = findFilm(L_Film, nama_film); // Cari film berdasarkan nama
+void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film) {
+ address_film F = findFilm(L_Film, nama_film); // Cari film berdasarkan nama
     if (F == NULL) {
         cout << "Film dengan nama '" << nama_film << "' tidak ditemukan." << endl;
         return;
@@ -507,4 +491,18 @@ void ShowParentRelationChild(ListAplikasi L_Aplikasi, ListFilm L_Film, string na
     }
     cout << endl; // Tambahkan baris baru setelah output
 }
+
+void countRelationFromParent(ListAplikasi L_aplikasi);
+
+void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
+
+void countChildWithoutRelation(ListFilm L_film, ListAplikasi L_aplikasi);
+
+void editRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film_lama, string nama_film_baru);
+
+
+//-------------------------------BATAS ACA---------------------------------------------
+
+
+
 
