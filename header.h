@@ -57,7 +57,7 @@ void insertFilm(ListFilm &L, address_film P);
 void insertRelation(ListAplikasi &L_aplikasi, ListFilm &L_film, string nama_aplikasi, string nama_film);
 void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi);
 void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film);
-void deleteRelation(address_aplikasi aplikasi, string nama_film);
+void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_film);
 address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi);
 int menu();
 void clearScreen();
@@ -73,11 +73,10 @@ void showParentWithChild(ListAplikasi L_aplikasi);
 
 void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi);
 void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
-void countRelationFromParent(address_aplikasi aplikasi);
+void countRelationFromParent(ListAplikasi aplikasi);
 void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film);
 void countChildWithoutRelation(ListFilm L_film, ListAplikasi L_aplikasi);
-void editRelation(address_aplikasi aplikasi, ListFilm &L_film, string nama_film_lama, string nama_film_baru);
+void editRelation(ListAplikasi &L_aplikasi, ListFilm &L_film,string nama_aplikasi, string nama_film_lama, string nama_film_baru);
 //--------------------------------------BATAS ACA------------------------------------------------------------------------------\
-
 
 #endif // HEADER_H_INCLUDED
