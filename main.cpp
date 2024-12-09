@@ -13,159 +13,196 @@ int main()
     createListFilm(LF);
 
     int pilih;
-    pilih = menu();
-    while (pilih != 17){
-        if (pilih == 1){
-            clearScreen();
+    menu();
+    cin >> pilih;
+
+    while (pilih >= 1 && pilih < 17) {
+        clearScreen();
+        cout << "========================================" << endl;
+        cout << "              MENU AKTIF                " << endl;
+        cout << "========================================" << endl;
+
+        if (pilih == 1) {
+            cout << ">>> Tambah Aplikasi <<<" << endl;
             address_aplikasi PA;
             infotype_aplikasi IA;
-            cout << "Masukan berapa kali loop ";
+            cout << "Masukkan jumlah aplikasi yang ingin ditambahkan: ";
             int c;
             cin >> c;
-            for (int i = 0; i< c;i++) {
+            for (int i = 0; i < c; i++) {
+                cout << endl;
                 cout << "Nama Aplikasi: ";
-            cin >> IA.nama_aplikasi;
+                cin >> IA.nama_aplikasi;
+                // Cek apakah aplikasi sudah ada
+                if (findAplikasi(LA, IA.nama_aplikasi) != NULL) {
+                    cout << "Aplikasi dengan nama \"" << IA.nama_aplikasi << "\" sudah ada. Tidak dapat ditambahkan lagi." << endl;
+                } else {
+                    cout << "Kualitas Video dalam Aplikasi: ";
+                    cin >> IA.kualitas;
 
-            cout << "Kualitas Video dalam Aplikasi: ";
-            cin >> IA.kualitas;
+                    cout << "Rating Aplikasi: ";
+                    cin >> IA.rating;
 
-            cout << "Rating Aplikasi: ";
-            cin >> IA.rating;
+                    cout << "Harga Langganan Bulanan: ";
+                    cin >> IA.harga;
 
-            cout << "Harga Langganan Bulanan: ";
-            cin >> IA.harga;
-
-            PA = allocateAplikasi(IA);
-            insertAplikasi(LA, PA);
-
-            cout << "Aplikasi berhasil di tambahkan!" << endl;
-            cout << endl;
-
-
+                    PA = allocateAplikasi(IA);
+                    insertAplikasi(LA, PA);
+                    cout << endl;
+                    cout << ">> Aplikasi berhasil ditambahkan!" << endl;
+                }
             }
-
-
-            pilih = menu();
-        } else if (pilih == 2){
-            clearScreen();
+            cout << endl;
+            menu();
+            cin >> pilih;
+        } else if (pilih == 2) {
+            cout << ">>> Tambah Film <<<" << endl;
             address_film PF;
             infotype_film IF;
-            cout << "Masukan berapa kali loop";
+            cout << "Masukkan jumlah film yang ingin ditambahkan: ";
             int c;
             cin >> c;
-            for (int i = 0; i< c;i++) {
-            cout << "Nama Film: ";
-            cin >> IF.nama;
-
-            cout << "Genre: ";
-            cin >> IF.genre;
-
-            cout << "Tahun Rilis: ";
-            cin >> IF.tahun;
-
-            cout << "Rating: ";
-            cin >> IF.rating;
-
-            PF = allocateFilm(IF);
-            insertFilm(LF, PF);
-
-
-            cout << "Film berhasil di tambahkan!" << endl;
-
-            cout << endl;
+            for (int i = 0; i < c; i++) {
+                cout << endl;
+                cout << "Nama Film: ";
+                cin >> IF.nama;
+                // Cek apakah film sudah ada
+                if (findFilm(LF, IF.nama) != NULL) {
+                    cout << "Film dengan nama \"" << IF.nama << "\" sudah ada. Tidak dapat ditambahkan lagi." << endl;
+                } else {
+                    cout << "Genre: ";
+                    cin >> IF.genre;
+                    cout << "Tahun Rilis: ";
+                    cin >> IF.tahun;
+                    cout << "Rating: ";
+                    cin >> IF.rating;
+                    PF = allocateFilm(IF);
+                    insertFilm(LF, PF);
+                    cout << endl;
+                    cout << ">> Film berhasil ditambahkan!" << endl << endl;
+                }
             }
-
-            pilih = menu();
-        } else if (pilih == 3){
-            clearScreen();
+            menu();
+            cin >> pilih;
+        } else if (pilih == 3) {
+            cout << ">>> Tampilkan Semua Aplikasi <<<" << endl;
             showAllAplikasi(LA);
-            cout << endl;
-            pilih = menu();
-        } else if (pilih == 4){
-            clearScreen();
+            menu();
+            cin >> pilih;
+
+        } else if (pilih == 4) {
+            cout << ">>> Tampilkan Semua Film <<<" << endl;
             showAllFilm(LF);
-            cout << endl;
-            pilih = menu();
-        } else if (pilih == 5){
-            clearScreen();
+            menu();
+            cin >> pilih;
+
+        } else if (pilih == 5) {
+            cout << ">>> Buat Relasi Aplikasi dengan Film <<<" << endl;
             cout << "Nama Aplikasi: ";
             cin >> nama_app;
             cout << "Nama Film: ";
             cin >> nama_film;
             insertRelation(LA, LF, nama_app, nama_film);
-            cout << endl;
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 6) {
-            clearScreen();
+            cout << ">>> Tampilkan Daftar Film dari Aplikasi <<<" << endl;
             cout << "Nama Aplikasi: ";
             cin >> nama_app;
+            cout << endl;
             showChildFromParent(LA, nama_app);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 7) {
-            clearScreen();
+            cout << ">>> Tampilkan Daftar Aplikasi dari Film <<<" << endl;
             cout << "Nama Film: ";
             cin >> nama_film;
+            cout << endl;
             showParentsFromChild(LF, LA, nama_film);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 8) {
-            clearScreen();
+            cout << ">>> Hapus Aplikasi <<<" << endl;
             cout << "Nama Aplikasi: ";
             cin >> nama_app;
             deleteAplikasi(LA, LF, nama_app);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 9) {
-            clearScreen();
+            cout << ">>> Hapus Film <<<" << endl;
             cout << "Nama Film: ";
             cin >> nama_film;
             deleteFilm(LF, LA, nama_film);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 10) {
-            clearScreen();
+            cout << ">>> Hapus Relasi <<<" << endl;
             cout << "Nama Aplikasi: ";
             cin >> nama_app;
             cout << "Nama Film: ";
             cin >> nama_film;
             deleteRelation(LA, nama_app, nama_film);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 11) {
-            clearScreen();
-            showChildWithParents(LF,LA);
-            pilih = menu();
+            cout << ">>> Show Data Film dan Aplikasi <<<" << endl;
+            showChildWithParents(LF, LA); //tampilan kalo kosong masih jelek
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 12) {
-           clearScreen();
-            cout << "Nama Film: ";
-            cin >> nama_film;
-            showParentsFromChild(LF, LA, nama_film);
-            pilih = menu();
+            cout << ">>> Show Data Aplikasi dengan Film <<<" << endl;
+            showParentWithChild(LA);
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 13) {
-            clearScreen();
+            cout << ">>> Hitung Relasi dari Aplikasi <<<" << endl;
             countRelationFromParent(LA);
-            pilih = menu();
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 14) {
-            clearScreen();
+            cout << ">>> Hitung Relasi dari Film <<<" << endl;
             cout << "Nama Film: ";
             cin >> nama_film;
-            countRelationFromChild(LF,LA, nama_film);
-            pilih = menu();
-        } else if(pilih == 15) {
-            clearScreen();
-            countChildWithoutRelation(LF,LA);
-            pilih = menu();
+            countRelationFromChild(LF, LA, nama_film);
+            menu();
+            cin >> pilih;
+
+        } else if (pilih == 15) {
+            cout << ">>> Hitung Film Tanpa Relasi <<<" << endl;
+            countChildWithoutRelation(LF, LA);
+            menu();
+            cin >> pilih;
+
         } else if (pilih == 16) {
-            clearScreen();
-            cout << "Masukan nama aplikasi";
+            cout << ">>> Edit Relasi Aplikasi <<<" << endl;
+            cout << "Nama Aplikasi: ";
             cin >> nama_app;
             string nama_film_baru;
-            cout << "masukan nama film baru";
+            cout << "Nama Film Baru: ";
             cin >> nama_film_baru;
-            cout << "masukan nama film lama";
+            cout << "Nama Film Lama: ";
             cin >> nama_film;
-            editRelation(LA,LF,nama_app, nama_film, nama_film_baru);
-            pilih = menu();
+            editRelation(LA, LF, nama_app, nama_film, nama_film_baru);
+            menu();
+            cin >> pilih;
         }
     }
-    if (pilih == 17) {
-        cout << "Anda keluar dari program" << endl;
+
+    if (pilih >= 17 || pilih <= 0) {
+        clearScreen();
+        cout << "========================================" << endl;
+        cout << "     Anda keluar dari program.          " << endl;
+        cout << "========================================" << endl;
     }
+
     return 0;
-};
+}
