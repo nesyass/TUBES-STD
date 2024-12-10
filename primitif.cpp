@@ -128,12 +128,12 @@ void deleteAplikasi(ListAplikasi &L, ListFilm &L_film, string nama_aplikasi) {
         P->relasi = NULL;
 
         // Menghapus aplikasi dari list
-        if (L.first == P) { // Aplikasi di awal
+        if (L.first == P) {
             L.first = P->next;
             P->next = NULL;
-        } else { // Aplikasi di tengah atau akhir
+        } else {
             address_aplikasi Q = L.first;
-            while (Q->next != P) { // Mencari elemen sebelum P
+            while (Q->next != P) {
                 Q = Q->next;
             }
             Q->next = P->next;
@@ -189,13 +189,13 @@ void deleteFilm(ListFilm &L, ListAplikasi &L_aplikasi, string nama_film) {
             L.last = NULL;
         } else if (L.first == P) { // Elemen berada di awal
             L.first = P->next;
-            if (L.first != NULL) L.first->prev = NULL;
+            L.first->prev = NULL;
         } else if (L.last == P) { // Elemen berada di akhir
             L.last = P->prev;
-            if (L.last != NULL) L.last->next = NULL;
+            L.last->next = NULL;
         } else { // Elemen berada di tengah
-            if (P->prev != NULL) P->prev->next = P->next;
-            if (P->next != NULL) P->next->prev = P->prev;
+            P->prev->next = P->next;
+            P->next->prev = P->prev;
         }
 
         // Putuskan koneksi elemen film
@@ -212,18 +212,22 @@ void deleteRelation(ListAplikasi &L_aplikasi, string nama_aplikasi, string nama_
     if (L_aplikasi.first == NULL) {
         cout << "List Aplikasi kosong" << endl;
     } else {
-        address_aplikasi P = findAplikasi(L_aplikasi, nama_aplikasi);
+        address_aplikasi P;
+        P = findAplikasi(L_aplikasi, nama_aplikasi);
         if (P == NULL) {
             cout << "Aplikasi dengan nama " << nama_aplikasi << " tidak ditemukan" << endl;
         } else {
             if (P->relasi == NULL) {
                 cout << "Tidak ada relasi pada aplikasi " << nama_aplikasi << endl;
             } else {
-                // Traversal untuk mencari dan menghapus relasi
-                address_relasi prev = NULL;
-                address_relasi curr = P->relasi;
-                bool isDeleted = false; // Status penghapusan
+                //mencari dan menghapus relasi
+                address_relasi prev;
+                address_relasi curr;
+                bool isDeleted; // Status penghapusan
 
+                prev = NULL;
+                isDeleted = false;
+                curr = P->relasi;
                 while (curr != NULL) {
                     if (curr->film->info_film.nama == nama_film) {
                         if (prev == NULL) { // Hapus elemen pertama
