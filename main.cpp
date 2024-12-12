@@ -18,10 +18,9 @@ int main()
 
     while (pilih >= 1 && pilih < 17) {
         clearScreen();
-        cout << "========================================" << endl;
-        cout << "              MENU AKTIF                " << endl;
-        cout << "========================================" << endl;
-
+        cout << "=================================================================" << endl;
+        cout << "                            MENU AKTIF                " << endl;
+        cout << "=================================================================" << endl;
         if (pilih == 1) {
             cout << ">>> Tambah Aplikasi <<<" << endl;
             address_aplikasi PA;
@@ -199,9 +198,9 @@ int main()
 
     if (pilih >= 17 || pilih <= 0) {
         clearScreen();
-        cout << "========================================" << endl;
-        cout << "     Anda keluar dari program.          " << endl;
-        cout << "========================================" << endl;
+        cout << "=================================================================" << endl;
+        cout << "                     ANDA KELAR DARI PROGRAM          " << endl;
+        cout << "=================================================================" << endl;
     }
 
     return 0;
