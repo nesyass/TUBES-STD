@@ -269,27 +269,27 @@ address_aplikasi findAplikasi(ListAplikasi L, string nama_aplikasi){
 }
 
 void menu() {
-    cout << "========================================" << endl;
-    cout << "          MENU APLIKASI STREAMING       " << endl;
-    cout << "========================================" << endl;
-    cout << "1.  Tambah Aplikasi" << endl;
-    cout << "2.  Tambah Film" << endl;
-    cout << "3.  Tampilkan Semua Aplikasi" << endl;
-    cout << "4.  Tampilkan Semua Film" << endl;
-    cout << "5.  Buat Relasi Aplikasi dengan Film" << endl;
-    cout << "6.  Menampilkan Daftar Film dari Suatu Aplikasi" << endl;
-    cout << "7.  Menampilkan Daftar Aplikasi yang Menyediakan Suatu Film" << endl;
-    cout << "8.  Hapus Aplikasi" << endl;
-    cout << "9.  Hapus Film" << endl;
-    cout << "10. Hapus Relasi" << endl;
-    cout << "11. Show Data Film Beserta Data Aplikasi yang Dimiliki" << endl;
-    cout << "12. Show Data Aplikasi yang Berelasi dengan Film Tertentu" << endl;
-    cout << "13. Count Relation dari Setiap Elemen Aplikasi" << endl;
-    cout << "14. Count Relation yang Dimiliki oleh Film Tertentu" << endl;
-    cout << "15. Count Elemen Film yang Tidak Memiliki Relasi" << endl;
-    cout << "16. Edit Relasi/Mengganti Film dari Aplikasi Tertentu" << endl;
-    cout << "17. Keluar" << endl;
-    cout << "========================================" << endl;
+    cout << "=================================================================" << endl;
+    cout << "                    MENU APLIKASI STREAMING       " << endl;
+    cout << "=================================================================" << endl;
+    cout << "| 1.  Tambah Aplikasi" << endl;
+    cout << "| 2.  Tambah Film" << endl;
+    cout << "| 3.  Tampilkan Semua Aplikasi" << endl;
+    cout << "| 4.  Tampilkan Semua Film" << endl;
+    cout << "| 5.  Buat Relasi Aplikasi dengan Film" << endl;
+    cout << "| 6.  Menampilkan Daftar Film dari Suatu Aplikasi" << endl;
+    cout << "| 7.  Menampilkan Daftar Aplikasi yang Menyediakan Suatu Film" << endl;
+    cout << "| 8.  Hapus Aplikasi" << endl;
+    cout << "| 9.  Hapus Film" << endl;
+    cout << "| 10. Hapus Relasi" << endl;
+    cout << "| 11. Show Data Film Beserta Data Aplikasi yang Dimiliki" << endl;
+    cout << "| 12. Show Data Aplikasi yang Berelasi dengan Film Tertentu" << endl;
+    cout << "| 13. Count Relation dari Setiap Elemen Aplikasi" << endl;
+    cout << "| 14. Count Relation yang Dimiliki oleh Film Tertentu" << endl;
+    cout << "| 15. Count Elemen Film yang Tidak Memiliki Relasi" << endl;
+    cout << "| 16. Edit Relasi/Mengganti Film dari Aplikasi Tertentu" << endl;
+    cout << "| 17. Keluar" << endl;
+    cout << "=================================================================" << endl;
     cout << "Masukkan Pilihan: ";
 }
 
@@ -347,20 +347,20 @@ void showAllAplikasi(ListAplikasi L){
 
     if (p == NULL) {
         cout << "Tidak ada aplikasi dalam list. Silahkan tambahkan aplikasi terlebih dahulu!" << endl;
-    }
-
-    cout << "DAFTAR APLIKASI: " << endl;
-    while(p != NULL) {
-        cout << "Daftar aplikasi ke-" << i << " :" << endl;
-        cout << "Nama Aplikasi    : " << p->info.nama_aplikasi << endl;
-        cout << "Kualitas         : " << p->info.kualitas << endl;
-        cout << "Rating           : " << p->info.rating << endl;
-        cout << "Harga            : " << p->info.harga << endl;
+    } else {
+        cout << "DAFTAR APLIKASI: " << endl;
+        while(p != NULL) {
+            cout << "Daftar aplikasi ke-" << i << " :" << endl;
+            cout << "Nama Aplikasi    : " << p->info.nama_aplikasi << endl;
+            cout << "Kualitas         : " << p->info.kualitas << endl;
+            cout << "Rating           : " << p->info.rating << endl;
+            cout << "Harga            : " << p->info.harga << endl;
+            cout << endl;
+            p = p->next;
+            i++;
+        }
         cout << endl;
-        p = p->next;
-        i++;
     }
-    cout << endl;
 }
 
 // IS: List film berisi elemen atau kosong.
@@ -373,20 +373,20 @@ void showAllFilm(ListFilm L){
 
     if (p == NULL) {
         cout << "Tidak ada film dalam list. Silahkan tambahkan film terlebih dahulu!" << endl;
-    }
-
-    cout << "DAFTAR FILM:" << endl;
-    while(p != NULL) {
-        cout << "Daftar film ke-" << i << " :" << endl;
-        cout << "Nama Film    : " << p->info_film.nama << endl;
-        cout << "Genre        : " << p->info_film.genre << endl;
-        cout << "Tahun        : " << p->info_film.tahun << endl;
-        cout << "Rating       : " << p->info_film.rating << endl;
-        cout << endl;
-        p = p->next;
-        i++;
+    } else {
+        cout << "DAFTAR FILM:" << endl;
+        while(p != NULL) {
+            cout << "Daftar film ke-" << i << " :" << endl;
+            cout << "Nama Film    : " << p->info_film.nama << endl;
+            cout << "Genre        : " << p->info_film.genre << endl;
+            cout << "Tahun        : " << p->info_film.tahun << endl;
+            cout << "Rating       : " << p->info_film.rating << endl;
+            cout << endl;
+            p = p->next;
+            i++;
     }
     cout << endl;
+    }
 }
 
 // IS: List aplikasi `L_aplikasi` dan nama aplikasi `nama_aplikasi` tersedia.
@@ -445,10 +445,10 @@ void showParentWithChild(ListAplikasi L_aplikasi){
             address_relasi r;
             r = p->relasi;
             if(r == NULL) {
-                cout << "   Tidak ada film pada aplikasi" << p->info.nama_aplikasi << "." << endl;
+                cout << "   Tidak ada film pada aplikasi " << p->info.nama_aplikasi << "." << endl;
             } else {
                 int j = 1;
-                cout << "   === Daftar film pada aplikasi" << p->info.nama_aplikasi << " ===" << endl;
+                cout << "   === Daftar film pada aplikasi " << p->info.nama_aplikasi << " ===" << endl;
                 while(r != NULL){
                     cout << "   Daftar film ke-" << i << " :" << endl;
                     cout << "   Nama Film    : " << r->film->info_film.nama << endl;
@@ -487,11 +487,17 @@ void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi) {
 
             bool found = false;
             address_aplikasi Q = L_aplikasi.first;
+            bool firstApp = true; // Untuk mengelola koma
+
             while (Q != NULL) {
                 address_relasi R = Q->relasi;
                 while (R != NULL) {
                     if (R->film == P) {
-                        cout << Q->info.nama_aplikasi << " ";
+                        if (!firstApp) {
+                            cout << ", ";
+                        }
+                        cout << Q->info.nama_aplikasi;
+                        firstApp = false;
                         found = true;
                     }
                     R = R->next;
@@ -511,6 +517,7 @@ void showChildWithParents(ListFilm L_film, ListAplikasi L_aplikasi) {
     cout << endl;
 }
 
+
 // IS: Diberikan ListFilm `L_film`, ListAplikasi `L_aplikasi`, dan nama film (`nama_film`) yang akan dicari.
 // FS: Menampilkan daftar aplikasi yang memiliki relasi dengan film `nama_film`.
 void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_film) {
@@ -519,8 +526,6 @@ void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_
     if (F == NULL) {
         cout << "Film dengan nama '" << nama_film << "' tidak ditemukan." << endl;
     } else {
-        cout << "=== Daftar aplikasi yang memiliki film '" << nama_film << "' ===" << endl;
-
         address_aplikasi Q = L_aplikasi.first; // Mulai dari aplikasi pertama
         bool found = false;
         int i = 1;
@@ -532,6 +537,9 @@ void showParentsFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nama_
             while (R != NULL) {
                 if (R->film == F) { // Jika film ditemukan di relasi
                     if (!foundInCurrentApp) { // Pastikan aplikasi hanya ditampilkan sekali
+                        if (!found) {
+                            cout << "=== Daftar aplikasi yang memiliki film '" << nama_film << "' ===" << endl;
+                        }
                         cout << "Aplikasi ke-" << i << " :" << endl;
                         cout << "Nama Aplikasi : " << Q->info.nama_aplikasi << endl;
                         cout << endl;
@@ -587,8 +595,6 @@ void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nam
     if (F == NULL) {
         cout << "Film dengan nama '" << nama_film << "' tidak ditemukan." << endl;
     } else {
-        cout << "=== Daftar aplikasi yang memiliki film '" << nama_film << "' ===" << endl;
-
         address_aplikasi Q = L_aplikasi.first; // Mulai dari aplikasi pertama
         address_relasi R;
 
@@ -599,7 +605,6 @@ void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nam
             while (R != NULL && !found) {
                 if (R->film == F) { // Jika film ditemukan di relasi
                     count++;
-                    cout << "   Aplikasi: " << Q->info.nama_aplikasi << endl;
                     found = true; // Tandai bahwa film ditemukan
                 } else {
                     R = R->next; // Lanjut ke relasi berikutnya
@@ -611,11 +616,28 @@ void countRelationFromChild(ListFilm L_film, ListAplikasi L_aplikasi, string nam
         if (count == 0) {
             cout << "Film '" << nama_film << "' belum dimiliki oleh aplikasi mana pun." << endl;
         } else {
+            cout << "=== Daftar aplikasi yang memiliki film '" << nama_film << "' ===" << endl;
+
+            Q = L_aplikasi.first; // Reset ke aplikasi pertama untuk mencetak nama aplikasi
+            while (Q != NULL) {
+                R = Q->relasi; // Mulai dari daftar relasi aplikasi
+                bool found = false; // Indikator untuk menentukan apakah film ditemukan pada aplikasi ini
+                while (R != NULL && !found) {
+                    if (R->film == F) { // Jika film ditemukan di relasi
+                        cout << "   Aplikasi: " << Q->info.nama_aplikasi << endl;
+                        found = true; // Tandai bahwa film ditemukan
+                    } else {
+                        R = R->next; // Lanjut ke relasi berikutnya
+                    }
+                }
+                Q = Q->next; // Lanjut ke aplikasi berikutnya
+            }
             cout << "Film ini ada di " << count << " aplikasi." << endl;
         }
     }
     cout << endl;
 }
+
 
 // IS: Diberikan ListFilm `L_film` dan ListAplikasi `L_aplikasi` yang berisi data relasi antara aplikasi dan film.
 // FS: Menampilkan film yang tidak memiliki relasi dengan aplikasi mana pun dan total jumlahnya.
