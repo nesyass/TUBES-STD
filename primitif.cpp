@@ -293,6 +293,22 @@ void menu() {
     cout << "Masukkan Pilihan: ";
 }
 
+string inputanKalimat() {
+    string kata, hasil;
+    bool isFirst = true;
+
+    cin >> kata;
+    while (kata != ".") {
+        if (isFirst) {
+            hasil = kata;
+            isFirst = false;
+        } else {
+            hasil = hasil + " " + kata;
+        }
+        cin >> kata;
+    }
+    return hasil;
+}
 
 void clearScreen() {
     if (_WIN32) {
