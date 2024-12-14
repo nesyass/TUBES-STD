@@ -31,7 +31,7 @@ int main()
             for (int i = 0; i < c; i++) {
                 cout << endl;
                 cout << "Nama Aplikasi: ";
-                cin >> IA.nama_aplikasi;
+                IA.nama_aplikasi = inputanKalimat();
                 // Cek apakah aplikasi sudah ada
                 if (findAplikasi(LA, IA.nama_aplikasi) != NULL) {
                     cout << "Aplikasi dengan nama \"" << IA.nama_aplikasi << "\" sudah ada. Tidak dapat ditambahkan lagi." << endl;
@@ -64,7 +64,7 @@ int main()
             for (int i = 0; i < c; i++) {
                 cout << endl;
                 cout << "Nama Film: ";
-                cin >> IF.nama;
+                IF.nama = inputanKalimat();
                 // Cek apakah film sudah ada
                 if (findFilm(LF, IF.nama) != NULL) {
                     cout << "Film dengan nama \"" << IF.nama << "\" sudah ada. Tidak dapat ditambahkan lagi." << endl;
